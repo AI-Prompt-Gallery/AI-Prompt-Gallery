@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
+            lightMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -47,8 +47,8 @@
             <div class="flex items-center gap-3">
                 <!-- Theme Toggle -->
                 <button id="theme-toggle" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors light:hover:bg-slate-100 light:hover:text-slate-900">
-                    <i class="fa-solid fa-moon text-lg dark:hidden"></i>
-                    <i class="fa-solid fa-sun text-lg hidden dark:block"></i>
+                    <i class="fa-solid fa-moon text-lg light:hidden"></i>
+                    <i class="fa-solid fa-sun text-lg hidden light:block"></i>
                 </button>
 
                 <!-- Admin Action Group -->
@@ -176,7 +176,7 @@
         // State Management
         let prompts = JSON.parse(localStorage.getItem('prompt_vault_db')) || defaultPrompts;
         let isAdmin = localStorage.getItem('prompt_vault_admin') === 'true';
-        let adminPassword = localStorage.getItem('prompt_vault_pw') || 'admin123';
+        let adminPassword = localStorage.getItem('prompt_vault_pw') || 'captainprabhu@1504';
         let selectedCategory = 'all';
 
         // Render Functions
