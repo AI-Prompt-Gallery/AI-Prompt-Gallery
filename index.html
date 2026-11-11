@@ -93,7 +93,7 @@
                     <select id="ratio-filter" onchange="renderPrompts()" class="px-3 py-2 rounded-xl bg-white border border-slate-300 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm">
                         <option value="all">All Ratios</option>
                         <option value="16:9">16:9 Landscape</option>
-                        <option value="9:16">9:16 Portrait</option>
+                        <option value="9:16" selected>9:16 Portrait</option>
                         <option value="1:1">1:1 Square</option>
                     </select>
                 </div>
@@ -158,8 +158,8 @@
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Aspect Ratio</label>
                     <select id="p-ratio" class="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="16:9">16:9 Landscape</option>
                         <option value="9:16">9:16 Portrait</option>
+                        <option value="16:9">16:9 Landscape</option>
                         <option value="1:1">1:1 Square</option>
                     </select>
                 </div>
@@ -207,7 +207,7 @@
                 title: "Cyberpunk Neon Samurai",
                 model: "Midjourney v6",
                 category: "Midjourney v6",
-                aspectRatio: "16:9",
+                aspectRatio: "9:16",
                 prompt: "A futuristic samurai warrior standing in rain-slicked neon-lit streets of Neo-Tokyo, volumetric lighting, photorealistic octane render, 8k resolution, cinematic composition.",
                 image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800&auto=format&fit=crop&q=60"
             },
@@ -216,7 +216,7 @@
                 title: "Hyper-Detailed Crystal Dragon",
                 model: "DALL-E 3",
                 category: "DALL-E 3",
-                aspectRatio: "1:1",
+                aspectRatio: "9:16",
                 prompt: "A majestic crystalline dragon perched atop a snowy mountain peak during sunset, glass refractivity, golden hour lighting, hyper-detailed fantasy art.",
                 image: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=60"
             },
@@ -225,7 +225,7 @@
                 title: "Minimalist Concrete Villa",
                 model: "FLUX.1",
                 category: "FLUX.1",
-                aspectRatio: "16:9",
+                aspectRatio: "9:16",
                 prompt: "Modern architectural exterior of a minimalist luxury concrete villa surrounded by brutalist gardens and calm reflection pools, soft morning fog, ArchDaily style photography.",
                 image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=60"
             }
@@ -269,7 +269,7 @@
             } else if (combined.includes('stable diffusion') || combined.includes('sdxl') || combined.includes('sd1.5')) {
                 return 'Stable Diffusion XL';
             } else {
-                return 'Midjourney v6'; // Default fallback model & category
+                return 'Midjourney v6';
             }
         }
 
@@ -313,8 +313,8 @@
             document.getElementById('empty-state').classList.add('hidden');
             container.innerHTML = filtered.map(p => `
                 <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-slate-300 shadow-sm hover:shadow-md transition-all flex flex-col group">
-                    <div class="relative aspect-video overflow-hidden bg-slate-100">
-                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="relative aspect-[9/16] overflow-hidden bg-slate-900 flex items-center justify-center">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
                         <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs text-slate-700 font-medium border border-slate-200 shadow-sm">
                             ${p.model}
                         </div>
@@ -424,7 +424,6 @@
             const titleVal = document.getElementById('p-title').value;
             const textVal = document.getElementById('p-text').value;
 
-            // Automatically detect model & category based on text content
             const autoModel = autoDetectModelAndCategory(textVal, titleVal);
 
             const data = {
